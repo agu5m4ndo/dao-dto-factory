@@ -11,9 +11,9 @@ class SQLFactory {
     create(type) {
         switch (type) {
             case "message":
-                return new MensajeDaoSqlite();
+                return MensajeDaoSqlite.getInstance();
             case "product":
-                return new ProductoDaoMariadb();
+                return ProductoDaoMariadb.getInstance();
             default:
                 logError.error(`No existe un DAO para ${type}`)
                 break;

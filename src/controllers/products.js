@@ -18,7 +18,7 @@ const Product = SQLFactory.create('product');
 // }
 
 
-const getAlProducts = async(req, res) => {
+const getAllProducts = async(req, res) => {
     const result = await Product.getAllProducts();
     loggerConsole.info(`${req.originalUrl} ${req.method}`);
     res.status(200).json({ result })
@@ -43,7 +43,7 @@ const deleteProduct = async(req, res) => {
 }
 
 module.exports = {
-    getAlProducts,
+    getAllProducts,
     getOneProduct,
     postProduct,
     deleteProduct

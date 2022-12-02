@@ -1,6 +1,7 @@
 const { logError, loggerConsole } = require('../../utils/logger');
 const ContainerSQL = require('../containers/ContainerSQL');
 const { options } = require('../../utils/mariadb')
+let instance = null;
 
 class ProductoDaoMariadb extends ContainerSQL {
     constructor() {
@@ -23,20 +24,25 @@ class ProductoDaoMariadb extends ContainerSQL {
             loggerConsole.error(message);
             logError.error("Product error: " + message);
         } else {
-            await super.save(object);
+            return await super.save(object);
         }
     }
 
     async getProductById(id) {
-        await super.getById(id);
+        return await super.getById(id);
     }
 
     async getAllProducts() {
-        await super.getAll();
+        return await super.getAll();
     }
 
     async deleteProductById(id) {
-        await super.deleteById(id);
+        return await super.deleteById(id);
+    }
+
+    static getInstance() {
+        if (!instance) instance = new ProductoDaoMariadb();
+        return instance;
     }
 }
 

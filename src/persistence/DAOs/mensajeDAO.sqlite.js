@@ -1,24 +1,30 @@
 const ContainerSQL = require('../containers/ContainerSQL');
 const { options } = require('../../utils/sqlite3');
+let instance = null;
 
 class MensajeDaoSqlite extends ContainerSQL {
     constructor() {
         super('messages', options);
     }
     async saveMessage(object) {
-        await super.save(object)
+        return await super.save(object)
     }
 
     async getMessageById(id) {
-        await super.getById(id);
+        return await super.getById(id);
     }
 
     async getAllMessages() {
-        await super.getAll();
+        return await super.getAll();
     }
 
     async deleteMessageById(id) {
-        await super.deleteById(id);
+        return await super.deleteById(id);
+    }
+
+    static getInstance() {
+        if (!instance) instance = new MensajeDaoSqlite();
+        return instance;
     }
 }
 
